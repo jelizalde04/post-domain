@@ -213,8 +213,8 @@ jobs:
               -e DOCKERHUB_TOKEN="${DOCKERHUB_TOKEN}" \
               joeli2104/get-post-by-id:latest
 
-  # Build y Push get-all-posts
-  build_and_push_get_all_posts:
+  # Build y Push get-all-post
+  build_and_push_get_all_post:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -224,22 +224,22 @@ jobs:
         run: |
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-      - name: Install dependencies and run tests for get-all-posts
+      - name: Install dependencies and run tests for get-all-post
         run: |
-          cd get-all-posts
+          cd get-all-post
           npm install
           npm test
 
-      - name: Build and push Docker image for get-all-posts
+      - name: Build and push Docker image for get-all-post
         run: |
-          docker build -t joeli2104/get-all-posts:latest ./get-all-posts
-          docker push joeli2104/get-all-posts:latest
+          docker build -t joeli2104/get-all-post:latest ./get-all-post
+          docker push joeli2104/get-all-post:latest
 
-  deploy_ec2_get_all_posts:
+  deploy_ec2_get_all_post:
     runs-on: ubuntu-latest
-    needs: build_and_push_get_all_posts
+    needs: build_and_push_get_all_post
     steps:
-      - name: Deploy get-all-posts to EC2 via SSH
+      - name: Deploy get-all-post to EC2 via SSH
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.EC2_post_TEST }}
@@ -260,13 +260,13 @@ jobs:
             export DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
             export DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
 
-            docker stop get-all-posts || true
-            docker rm get-all-posts || true
+            docker stop get-all-post || true
+            docker rm get-all-post || true
 
             docker login -u "${DOCKERHUB_USERNAME}" -p "${DOCKERHUB_TOKEN}"
-            docker pull joeli2104/get-all-posts:latest
+            docker pull joeli2104/get-all-post:latest
 
-            docker run -d --name get-all-posts \
+            docker run -d --name get-all-post \
               -p 3004:3004 \
               -e DB_HOST="${DB_HOST}" \
               -e DB_USER="${DB_USER}" \
@@ -280,7 +280,7 @@ jobs:
               -e DB_PORT="${DB_PORT}" \
               -e DOCKERHUB_USERNAME="${DOCKERHUB_USERNAME}" \
               -e DOCKERHUB_TOKEN="${DOCKERHUB_TOKEN}" \
-              joeli2104/get-all-posts:latest
+              joeli2104/get-all-post:latest
 
   # Build y Push delete-post
   build_and_push_delete_post:
