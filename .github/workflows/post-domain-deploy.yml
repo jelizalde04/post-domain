@@ -56,20 +56,23 @@ jobs:
             docker stop create-post || true
             docker rm create-post || true
 
+            docker login -u "${DOCKERHUB_USERNAME}" -p "${DOCKERHUB_TOKEN}"
+            docker pull joeli2104/create-post:latest
+
             docker run -d --name create-post \
               -p 3001:3001 \
-              -e DB_HOST=${{ secrets.DB_HOST }} \
-              -e DB_USER=${{ secrets.DB_USER }} \
-              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
-              -e DB_NAME=${{ secrets.DB_NAME }} \
-              -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
-              -e S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }} \
-              -e AWS_REGION=${{ secrets.AWS_REGION }} \
-              -e POST_DB_NAME=${{ secrets.POST_DB_NAME }} \
-              -e PET_DB_NAME=${{ secrets.PET_DB_NAME }} \
-              -e DB_PORT=${{ secrets.DB_PORT }} \
-              -e DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }} \
-              -e DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }} \
+              -e DB_HOST="${DB_HOST}" \
+              -e DB_USER="${DB_USER}" \
+              -e DB_PASSWORD="${DB_PASSWORD}" \
+              -e DB_NAME="${DB_NAME}" \
+              -e JWT_SECRET="${JWT_SECRET}" \
+              -e S3_BUCKET_NAME="${S3_BUCKET_NAME}" \
+              -e AWS_REGION="${AWS_REGION}" \
+              -e POST_DB_NAME="${POST_DB_NAME}" \
+              -e PET_DB_NAME="${PET_DB_NAME}" \
+              -e DB_PORT="${DB_PORT}" \
+              -e DOCKERHUB_USERNAME="${DOCKERHUB_USERNAME}" \
+              -e DOCKERHUB_TOKEN="${DOCKERHUB_TOKEN}" \
               joeli2104/create-post:latest
 
   # Build y Push update-post
@@ -122,20 +125,23 @@ jobs:
             docker stop update-post || true
             docker rm update-post || true
 
+            docker login -u "${DOCKERHUB_USERNAME}" -p "${DOCKERHUB_TOKEN}"
+            docker pull joeli2104/update-post:latest
+
             docker run -d --name update-post \
               -p 3002:3002 \
-              -e DB_HOST=${{ secrets.DB_HOST }} \
-              -e DB_USER=${{ secrets.DB_USER }} \
-              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
-              -e DB_NAME=${{ secrets.DB_NAME }} \
-              -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
-              -e S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }} \
-              -e AWS_REGION=${{ secrets.AWS_REGION }} \
-              -e POST_DB_NAME=${{ secrets.POST_DB_NAME }} \
-              -e PET_DB_NAME=${{ secrets.PET_DB_NAME }} \
-              -e DB_PORT=${{ secrets.DB_PORT }} \
-              -e DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }} \
-              -e DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }} \
+              -e DB_HOST="${DB_HOST}" \
+              -e DB_USER="${DB_USER}" \
+              -e DB_PASSWORD="${DB_PASSWORD}" \
+              -e DB_NAME="${DB_NAME}" \
+              -e JWT_SECRET="${JWT_SECRET}" \
+              -e S3_BUCKET_NAME="${S3_BUCKET_NAME}" \
+              -e AWS_REGION="${AWS_REGION}" \
+              -e POST_DB_NAME="${POST_DB_NAME}" \
+              -e PET_DB_NAME="${PET_DB_NAME}" \
+              -e DB_PORT="${DB_PORT}" \
+              -e DOCKERHUB_USERNAME="${DOCKERHUB_USERNAME}" \
+              -e DOCKERHUB_TOKEN="${DOCKERHUB_TOKEN}" \
               joeli2104/update-post:latest
 
   # Build y Push get-post-by-id
@@ -188,20 +194,23 @@ jobs:
             docker stop get-post-by-id || true
             docker rm get-post-by-id || true
 
+            docker login -u "${DOCKERHUB_USERNAME}" -p "${DOCKERHUB_TOKEN}"
+            docker pull joeli2104/get-post-by-id:latest
+
             docker run -d --name get-post-by-id \
               -p 3003:3003 \
-              -e DB_HOST=${{ secrets.DB_HOST }} \
-              -e DB_USER=${{ secrets.DB_USER }} \
-              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
-              -e DB_NAME=${{ secrets.DB_NAME }} \
-              -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
-              -e S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }} \
-              -e AWS_REGION=${{ secrets.AWS_REGION }} \
-              -e POST_DB_NAME=${{ secrets.POST_DB_NAME }} \
-              -e PET_DB_NAME=${{ secrets.PET_DB_NAME }} \
-              -e DB_PORT=${{ secrets.DB_PORT }} \
-              -e DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }} \
-              -e DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }} \
+              -e DB_HOST="${DB_HOST}" \
+              -e DB_USER="${DB_USER}" \
+              -e DB_PASSWORD="${DB_PASSWORD}" \
+              -e DB_NAME="${DB_NAME}" \
+              -e JWT_SECRET="${JWT_SECRET}" \
+              -e S3_BUCKET_NAME="${S3_BUCKET_NAME}" \
+              -e AWS_REGION="${AWS_REGION}" \
+              -e POST_DB_NAME="${POST_DB_NAME}" \
+              -e PET_DB_NAME="${PET_DB_NAME}" \
+              -e DB_PORT="${DB_PORT}" \
+              -e DOCKERHUB_USERNAME="${DOCKERHUB_USERNAME}" \
+              -e DOCKERHUB_TOKEN="${DOCKERHUB_TOKEN}" \
               joeli2104/get-post-by-id:latest
 
   # Build y Push get-all-posts
@@ -254,20 +263,23 @@ jobs:
             docker stop get-all-posts || true
             docker rm get-all-posts || true
 
+            docker login -u "${DOCKERHUB_USERNAME}" -p "${DOCKERHUB_TOKEN}"
+            docker pull joeli2104/get-all-posts:latest
+
             docker run -d --name get-all-posts \
               -p 3004:3004 \
-              -e DB_HOST=${{ secrets.DB_HOST }} \
-              -e DB_USER=${{ secrets.DB_USER }} \
-              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
-              -e DB_NAME=${{ secrets.DB_NAME }} \
-              -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
-              -e S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }} \
-              -e AWS_REGION=${{ secrets.AWS_REGION }} \
-              -e POST_DB_NAME=${{ secrets.POST_DB_NAME }} \
-              -e PET_DB_NAME=${{ secrets.PET_DB_NAME }} \
-              -e DB_PORT=${{ secrets.DB_PORT }} \
-              -e DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }} \
-              -e DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }} \
+              -e DB_HOST="${DB_HOST}" \
+              -e DB_USER="${DB_USER}" \
+              -e DB_PASSWORD="${DB_PASSWORD}" \
+              -e DB_NAME="${DB_NAME}" \
+              -e JWT_SECRET="${JWT_SECRET}" \
+              -e S3_BUCKET_NAME="${S3_BUCKET_NAME}" \
+              -e AWS_REGION="${AWS_REGION}" \
+              -e POST_DB_NAME="${POST_DB_NAME}" \
+              -e PET_DB_NAME="${PET_DB_NAME}" \
+              -e DB_PORT="${DB_PORT}" \
+              -e DOCKERHUB_USERNAME="${DOCKERHUB_USERNAME}" \
+              -e DOCKERHUB_TOKEN="${DOCKERHUB_TOKEN}" \
               joeli2104/get-all-posts:latest
 
   # Build y Push delete-post
@@ -320,18 +332,21 @@ jobs:
             docker stop delete-post || true
             docker rm delete-post || true
 
+            docker login -u "${DOCKERHUB_USERNAME}" -p "${DOCKERHUB_TOKEN}"
+            docker pull joeli2104/delete-post:latest
+
             docker run -d --name delete-post \
               -p 3005:3005 \
-              -e DB_HOST=${{ secrets.DB_HOST }} \
-              -e DB_USER=${{ secrets.DB_USER }} \
-              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
-              -e DB_NAME=${{ secrets.DB_NAME }} \
-              -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
-              -e S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }} \
-              -e AWS_REGION=${{ secrets.AWS_REGION }} \
-              -e POST_DB_NAME=${{ secrets.POST_DB_NAME }} \
-              -e PET_DB_NAME=${{ secrets.PET_DB_NAME }} \
-              -e DB_PORT=${{ secrets.DB_PORT }} \
-              -e DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }} \
-              -e DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }} \
+              -e DB_HOST="${DB_HOST}" \
+              -e DB_USER="${DB_USER}" \
+              -e DB_PASSWORD="${DB_PASSWORD}" \
+              -e DB_NAME="${DB_NAME}" \
+              -e JWT_SECRET="${JWT_SECRET}" \
+              -e S3_BUCKET_NAME="${S3_BUCKET_NAME}" \
+              -e AWS_REGION="${AWS_REGION}" \
+              -e POST_DB_NAME="${POST_DB_NAME}" \
+              -e PET_DB_NAME="${PET_DB_NAME}" \
+              -e DB_PORT="${DB_PORT}" \
+              -e DOCKERHUB_USERNAME="${DOCKERHUB_USERNAME}" \
+              -e DOCKERHUB_TOKEN="${DOCKERHUB_TOKEN}" \
               joeli2104/delete-post:latest
