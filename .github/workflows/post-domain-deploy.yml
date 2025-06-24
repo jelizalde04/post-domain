@@ -60,7 +60,7 @@ jobs:
             docker pull joeli2104/create-post:latest
 
             docker run -d --name create-post \
-              -p 3001:3001 \
+              -p 4001:4001 \
               -e DB_HOST="${DB_HOST}" \
               -e DB_USER="${DB_USER}" \
               -e DB_PASSWORD="${DB_PASSWORD}" \
@@ -129,7 +129,7 @@ jobs:
             docker pull joeli2104/update-post:latest
 
             docker run -d --name update-post \
-              -p 3002:3002 \
+              -p 4002:4002 \
               -e DB_HOST="${DB_HOST}" \
               -e DB_USER="${DB_USER}" \
               -e DB_PASSWORD="${DB_PASSWORD}" \
@@ -198,7 +198,7 @@ jobs:
             docker pull joeli2104/get-post-by-id:latest
 
             docker run -d --name get-post-by-id \
-              -p 3003:3003 \
+              -p 4003:4003 \
               -e DB_HOST="${DB_HOST}" \
               -e DB_USER="${DB_USER}" \
               -e DB_PASSWORD="${DB_PASSWORD}" \
@@ -267,7 +267,7 @@ jobs:
             docker pull joeli2104/get-all-post:latest
 
             docker run -d --name get-all-post \
-              -p 3004:3004 \
+              -p 4004:4004 \
               -e DB_HOST="${DB_HOST}" \
               -e DB_USER="${DB_USER}" \
               -e DB_PASSWORD="${DB_PASSWORD}" \
@@ -336,7 +336,7 @@ jobs:
             docker pull joeli2104/delete-post:latest
 
             docker run -d --name delete-post \
-              -p 3005:3005 \
+              -p 4005:4005 \
               -e DB_HOST="${DB_HOST}" \
               -e DB_USER="${DB_USER}" \
               -e DB_PASSWORD="${DB_PASSWORD}" \
