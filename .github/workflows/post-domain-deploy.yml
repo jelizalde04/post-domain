@@ -1,0 +1,337 @@
+name: Docker Build and Deploy Post Domain
+
+on:
+  push:
+    branches:
+      - test
+
+jobs:
+  # Build y Push create-post
+  build_and_push_create_post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Install dependencies and run tests for create-post
+        run: |
+          cd create-post
+          npm install
+          npm test
+
+      - name: Build and push Docker image for create-post
+        run: |
+          docker build -t joeli2104/create-post:latest ./create-post
+          docker push joeli2104/create-post:latest
+
+  deploy_ec2_create_post:
+    runs-on: ubuntu-latest
+    needs: build_and_push_create_post
+    steps:
+      - name: Deploy create-post to EC2 via SSH
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_post_TEST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            export AWS_REGION=${{ secrets.AWS_REGION }}
+            export DB_HOST=${{ secrets.DB_HOST }}
+            export DB_USER=${{ secrets.DB_USER }}
+            export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            export DB_NAME=${{ secrets.DB_NAME }}
+            export JWT_SECRET=${{ secrets.JWT_SECRET }}
+            export POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            export PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            export S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            export DB_PORT=${{ secrets.DB_PORT }}
+            export DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+            export DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
+
+            docker stop create-post || true
+            docker rm create-post || true
+
+            docker run -d --name create-post \
+              -p 3001:3001 \
+              -e DB_HOST=${{ secrets.DB_HOST }} \
+              -e DB_USER=${{ secrets.DB_USER }} \
+              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              -e DB_NAME=${{ secrets.DB_NAME }} \
+              -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+              -e S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }} \
+              -e AWS_REGION=${{ secrets.AWS_REGION }} \
+              -e POST_DB_NAME=${{ secrets.POST_DB_NAME }} \
+              -e PET_DB_NAME=${{ secrets.PET_DB_NAME }} \
+              -e DB_PORT=${{ secrets.DB_PORT }} \
+              -e DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }} \
+              -e DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }} \
+              joeli2104/create-post:latest
+
+  # Build y Push update-post
+  build_and_push_update_post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Install dependencies and run tests for update-post
+        run: |
+          cd update-post
+          npm install
+          npm test
+
+      - name: Build and push Docker image for update-post
+        run: |
+          docker build -t joeli2104/update-post:latest ./update-post
+          docker push joeli2104/update-post:latest
+
+  deploy_ec2_update_post:
+    runs-on: ubuntu-latest
+    needs: build_and_push_update_post
+    steps:
+      - name: Deploy update-post to EC2 via SSH
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_post_TEST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            export AWS_REGION=${{ secrets.AWS_REGION }}
+            export DB_HOST=${{ secrets.DB_HOST }}
+            export DB_USER=${{ secrets.DB_USER }}
+            export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            export DB_NAME=${{ secrets.DB_NAME }}
+            export JWT_SECRET=${{ secrets.JWT_SECRET }}
+            export POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            export PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            export S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            export DB_PORT=${{ secrets.DB_PORT }}
+            export DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+            export DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
+
+            docker stop update-post || true
+            docker rm update-post || true
+
+            docker run -d --name update-post \
+              -p 3002:3002 \
+              -e DB_HOST=${{ secrets.DB_HOST }} \
+              -e DB_USER=${{ secrets.DB_USER }} \
+              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              -e DB_NAME=${{ secrets.DB_NAME }} \
+              -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+              -e S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }} \
+              -e AWS_REGION=${{ secrets.AWS_REGION }} \
+              -e POST_DB_NAME=${{ secrets.POST_DB_NAME }} \
+              -e PET_DB_NAME=${{ secrets.PET_DB_NAME }} \
+              -e DB_PORT=${{ secrets.DB_PORT }} \
+              -e DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }} \
+              -e DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }} \
+              joeli2104/update-post:latest
+
+  # Build y Push get-post-by-id
+  build_and_push_get_post_by_id:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Install dependencies and run tests for get-post-by-id
+        run: |
+          cd get-post-by-id
+          npm install
+          npm test
+
+      - name: Build and push Docker image for get-post-by-id
+        run: |
+          docker build -t joeli2104/get-post-by-id:latest ./get-post-by-id
+          docker push joeli2104/get-post-by-id:latest
+
+  deploy_ec2_get_post_by_id:
+    runs-on: ubuntu-latest
+    needs: build_and_push_get_post_by_id
+    steps:
+      - name: Deploy get-post-by-id to EC2 via SSH
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_post_TEST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            export AWS_REGION=${{ secrets.AWS_REGION }}
+            export DB_HOST=${{ secrets.DB_HOST }}
+            export DB_USER=${{ secrets.DB_USER }}
+            export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            export DB_NAME=${{ secrets.DB_NAME }}
+            export JWT_SECRET=${{ secrets.JWT_SECRET }}
+            export POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            export PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            export S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            export DB_PORT=${{ secrets.DB_PORT }}
+            export DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+            export DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
+
+            docker stop get-post-by-id || true
+            docker rm get-post-by-id || true
+
+            docker run -d --name get-post-by-id \
+              -p 3003:3003 \
+              -e DB_HOST=${{ secrets.DB_HOST }} \
+              -e DB_USER=${{ secrets.DB_USER }} \
+              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              -e DB_NAME=${{ secrets.DB_NAME }} \
+              -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+              -e S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }} \
+              -e AWS_REGION=${{ secrets.AWS_REGION }} \
+              -e POST_DB_NAME=${{ secrets.POST_DB_NAME }} \
+              -e PET_DB_NAME=${{ secrets.PET_DB_NAME }} \
+              -e DB_PORT=${{ secrets.DB_PORT }} \
+              -e DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }} \
+              -e DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }} \
+              joeli2104/get-post-by-id:latest
+
+  # Build y Push get-all-posts
+  build_and_push_get_all_posts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Install dependencies and run tests for get-all-posts
+        run: |
+          cd get-all-posts
+          npm install
+          npm test
+
+      - name: Build and push Docker image for get-all-posts
+        run: |
+          docker build -t joeli2104/get-all-posts:latest ./get-all-posts
+          docker push joeli2104/get-all-posts:latest
+
+  deploy_ec2_get_all_posts:
+    runs-on: ubuntu-latest
+    needs: build_and_push_get_all_posts
+    steps:
+      - name: Deploy get-all-posts to EC2 via SSH
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_post_TEST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            export AWS_REGION=${{ secrets.AWS_REGION }}
+            export DB_HOST=${{ secrets.DB_HOST }}
+            export DB_USER=${{ secrets.DB_USER }}
+            export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            export DB_NAME=${{ secrets.DB_NAME }}
+            export JWT_SECRET=${{ secrets.JWT_SECRET }}
+            export POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            export PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            export S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            export DB_PORT=${{ secrets.DB_PORT }}
+            export DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+            export DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
+
+            docker stop get-all-posts || true
+            docker rm get-all-posts || true
+
+            docker run -d --name get-all-posts \
+              -p 3004:3004 \
+              -e DB_HOST=${{ secrets.DB_HOST }} \
+              -e DB_USER=${{ secrets.DB_USER }} \
+              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              -e DB_NAME=${{ secrets.DB_NAME }} \
+              -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+              -e S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }} \
+              -e AWS_REGION=${{ secrets.AWS_REGION }} \
+              -e POST_DB_NAME=${{ secrets.POST_DB_NAME }} \
+              -e PET_DB_NAME=${{ secrets.PET_DB_NAME }} \
+              -e DB_PORT=${{ secrets.DB_PORT }} \
+              -e DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }} \
+              -e DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }} \
+              joeli2104/get-all-posts:latest
+
+  # Build y Push delete-post
+  build_and_push_delete_post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Install dependencies and run tests for delete-post
+        run: |
+          cd delete-post
+          npm install
+          npm test
+
+      - name: Build and push Docker image for delete-post
+        run: |
+          docker build -t joeli2104/delete-post:latest ./delete-post
+          docker push joeli2104/delete-post:latest
+
+  deploy_ec2_delete_post:
+    runs-on: ubuntu-latest
+    needs: build_and_push_delete_post
+    steps:
+      - name: Deploy delete-post to EC2 via SSH
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_post_TEST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            export AWS_REGION=${{ secrets.AWS_REGION }}
+            export DB_HOST=${{ secrets.DB_HOST }}
+            export DB_USER=${{ secrets.DB_USER }}
+            export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            export DB_NAME=${{ secrets.DB_NAME }}
+            export JWT_SECRET=${{ secrets.JWT_SECRET }}
+            export POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            export PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            export S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            export DB_PORT=${{ secrets.DB_PORT }}
+            export DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+            export DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
+
+            docker stop delete-post || true
+            docker rm delete-post || true
+
+            docker run -d --name delete-post \
+              -p 3005:3005 \
+              -e DB_HOST=${{ secrets.DB_HOST }} \
+              -e DB_USER=${{ secrets.DB_USER }} \
+              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              -e DB_NAME=${{ secrets.DB_NAME }} \
+              -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+              -e S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }} \
+              -e AWS_REGION=${{ secrets.AWS_REGION }} \
+              -e POST_DB_NAME=${{ secrets.POST_DB_NAME }} \
+              -e PET_DB_NAME=${{ secrets.PET_DB_NAME }} \
+              -e DB_PORT=${{ secrets.DB_PORT }} \
+              -e DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }} \
+              -e DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }} \
+              joeli2104/delete-post:latest

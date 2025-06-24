@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const sequelize = require('../config/db');
+const dbs = require('../config/db'); // Importa el objeto con todas las instancias
 
 describe('Testing Microservice Functionality', () => {
   test('db.js file exists', () => {
@@ -8,20 +8,24 @@ describe('Testing Microservice Functionality', () => {
     expect(fs.existsSync(filePath)).toBe(true);
   });
 
-  test('Database connection is established successfully', async () => {
-    expect.assertions(1);
-    try {
-      await sequelize.authenticate();
-      console.log('✅ Database connection test completed and approved successfully.');
-      expect(true).toBe(true); 
-    } catch (error) {
-      console.error('❌ Error connecting to the database:', error);
-      expect(error).toBeUndefined(); 
-    }
+  Object.entries(dbs).forEach(([dbName, dbInstance]) => {
+    test(`Database connection for "${dbName}" is established successfully`, async () => {
+      expect.assertions(1);
+      try {
+        await dbInstance.authenticate();
+        console.log(`✅ Database connection test for "${dbName}" completed and approved successfully.`);
+        expect(true).toBe(true);
+      } catch (error) {
+        console.error(`❌ Error connecting to the database "${dbName}":`, error);
+        expect(error).toBeUndefined();
+      }
+    });
   });
 
   afterAll(async () => {
-    await sequelize.close();
-    console.log('✅ Database connection closed.');
+    for (const [dbName, dbInstance] of Object.entries(dbs)) {
+      await dbInstance.close();
+      console.log(`✅ Database connection "${dbName}" closed.`);
+    }
   });
 });
