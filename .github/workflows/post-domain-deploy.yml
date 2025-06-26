@@ -17,6 +17,16 @@ jobs:
         run: |
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
+      - name: Export environment variables for test
+        run: |
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+          echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+          echo "POST_DB_NAME=${{ secrets.POST_DB_NAME }}" >> $GITHUB_ENV
+          echo "PET_DB_NAME=${{ secrets.PET_DB_NAME }}" >> $GITHUB_ENV
+
       - name: Install dependencies and run tests for create-post
         run: |
           cd create-post
@@ -85,6 +95,16 @@ jobs:
       - name: Log in to Docker Hub
         run: |
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Export environment variables for test
+        run: |
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+          echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+          echo "POST_DB_NAME=${{ secrets.POST_DB_NAME }}" >> $GITHUB_ENV
+          echo "PET_DB_NAME=${{ secrets.PET_DB_NAME }}" >> $GITHUB_ENV
 
       - name: Install dependencies and run tests for update-post
         run: |
@@ -155,6 +175,16 @@ jobs:
         run: |
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
+      - name: Export environment variables for test
+        run: |
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+          echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+          echo "POST_DB_NAME=${{ secrets.POST_DB_NAME }}" >> $GITHUB_ENV
+          echo "PET_DB_NAME=${{ secrets.PET_DB_NAME }}" >> $GITHUB_ENV
+
       - name: Install dependencies and run tests for get-post-by-id
         run: |
           cd get-post-by-id
@@ -224,6 +254,16 @@ jobs:
         run: |
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
+      - name: Export environment variables for test
+        run: |
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+          echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+          echo "POST_DB_NAME=${{ secrets.POST_DB_NAME }}" >> $GITHUB_ENV
+          echo "PET_DB_NAME=${{ secrets.PET_DB_NAME }}" >> $GITHUB_ENV
+
       - name: Install dependencies and run tests for get-all-post
         run: |
           cd get-all-post
@@ -292,6 +332,16 @@ jobs:
       - name: Log in to Docker Hub
         run: |
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Export environment variables for test
+        run: |
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+          echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+          echo "POST_DB_NAME=${{ secrets.POST_DB_NAME }}" >> $GITHUB_ENV
+          echo "PET_DB_NAME=${{ secrets.PET_DB_NAME }}" >> $GITHUB_ENV
 
       - name: Install dependencies and run tests for delete-post
         run: |
