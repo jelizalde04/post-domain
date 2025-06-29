@@ -104,7 +104,6 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: 22
           script: |
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop create-post || true
@@ -135,7 +134,6 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
-          port: 22
           script: |
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop create-post || true
@@ -206,7 +204,6 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: 22
           script: |
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop update-post || true
@@ -237,7 +234,6 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
-          port: 22
           script: |
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop update-post || true
@@ -308,7 +304,6 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: 22
           script: |
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop get-post-by-id || true
@@ -339,7 +334,6 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
-          port: 22
           script: |
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop get-post-by-id || true
@@ -410,7 +404,6 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: 22
           script: |
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop get-all-post || true
@@ -441,7 +434,6 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
-          port: 22
           script: |
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop get-all-post || true
@@ -512,7 +504,6 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: 22
           script: |
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop delete-post || true
@@ -543,7 +534,6 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
-          port: 22
           script: |
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop delete-post || true
