@@ -2,6 +2,7 @@ services:
   create-post:
     build:
       context: ./create-post
+    image: joeli2104/create-post:latest
     container_name: create-post
     ports:
       - "4001:4001"
@@ -16,12 +17,11 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - S3_BUCKET_NAME=${S3_BUCKET_NAME}
       - AWS_REGION=${AWS_REGION}
-    working_dir: /app
-    command: ["node", "app.js"]
 
   update-post:
     build:
       context: ./update-post
+    image: joeli2104/update-post:latest
     container_name: update-post
     ports:
       - "4002:4002"
@@ -36,12 +36,11 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - S3_BUCKET_NAME=${S3_BUCKET_NAME}
       - AWS_REGION=${AWS_REGION}
-    working_dir: /app
-    command: ["node", "app.js"]
 
   get-post-by-id:
     build:
       context: ./get-post-by-id
+    image: joeli2104/get-post-by-id:latest
     container_name: get-post-by-id
     ports:
       - "4003:4003"
@@ -56,12 +55,11 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - S3_BUCKET_NAME=${S3_BUCKET_NAME}
       - AWS_REGION=${AWS_REGION}
-    working_dir: /app
-    command: ["node", "app.js"]
 
   get-all-post:
     build:
       context: ./get-all-post
+    image: joeli2104/get-all-post:latest
     container_name: get-all-post
     ports:
       - "4004:4004"
@@ -76,12 +74,11 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - S3_BUCKET_NAME=${S3_BUCKET_NAME}
       - AWS_REGION=${AWS_REGION}
-    working_dir: /app
-    command: ["node", "app.js"]
 
   delete-post:
     build:
       context: ./delete-post
+    image: joeli2104/delete-post:latest
     container_name: delete-post
     ports:
       - "4005:4005"
@@ -96,5 +93,3 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - S3_BUCKET_NAME=${S3_BUCKET_NAME}
       - AWS_REGION=${AWS_REGION}
-    working_dir: /app
-    command: ["node", "app.js"]
