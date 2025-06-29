@@ -64,8 +64,8 @@ jobs:
           DB_HOST=${{ secrets.DB_HOST }}
           DB_USER=${{ secrets.DB_USER }}
           DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-          DB_PORT=${{ secrets.DB_PORT }}
-          DB_NAME=${{ secrets.DB_NAME }}
+          DB_PORT=3306
+          DB_NAME=${{ secrets.POST_DB_NAME }}
           POST_DB_NAME=${{ secrets.POST_DB_NAME }}
           PET_DB_NAME=${{ secrets.PET_DB_NAME }}
           JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -100,7 +100,7 @@ jobs:
       - name: Deploy create-post to EC2 TEST
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.EC2_post_TEST }}
+          host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
@@ -108,8 +108,8 @@ jobs:
             DB_HOST=${{ secrets.DB_HOST }}
             DB_USER=${{ secrets.DB_USER }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_PORT=${{ secrets.DB_PORT }}
-            DB_NAME=${{ secrets.DB_NAME }}
+            DB_PORT=3306
+            DB_NAME=${{ secrets.POST_DB_NAME }}
             POST_DB_NAME=${{ secrets.POST_DB_NAME }}
             PET_DB_NAME=${{ secrets.PET_DB_NAME }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -134,7 +134,7 @@ jobs:
       - name: Deploy create-post to EC2 PROD
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.EC2_post_PROD }}
+          host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
           script: |
@@ -142,8 +142,8 @@ jobs:
             DB_HOST=${{ secrets.DB_HOST }}
             DB_USER=${{ secrets.DB_USER }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_PORT=${{ secrets.DB_PORT }}
-            DB_NAME=${{ secrets.DB_NAME }}
+            DB_PORT=3306
+            DB_NAME=${{ secrets.POST_DB_NAME }}
             POST_DB_NAME=${{ secrets.POST_DB_NAME }}
             PET_DB_NAME=${{ secrets.PET_DB_NAME }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -173,8 +173,8 @@ jobs:
           DB_HOST=${{ secrets.DB_HOST }}
           DB_USER=${{ secrets.DB_USER }}
           DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-          DB_PORT=${{ secrets.DB_PORT }}
-          DB_NAME=${{ secrets.DB_NAME }}
+          DB_PORT=3306
+          DB_NAME=${{ secrets.POST_DB_NAME }}
           POST_DB_NAME=${{ secrets.POST_DB_NAME }}
           PET_DB_NAME=${{ secrets.PET_DB_NAME }}
           JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -209,7 +209,7 @@ jobs:
       - name: Deploy update-post to EC2 TEST
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.EC2_post_TEST }}
+          host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
@@ -217,8 +217,8 @@ jobs:
             DB_HOST=${{ secrets.DB_HOST }}
             DB_USER=${{ secrets.DB_USER }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_PORT=${{ secrets.DB_PORT }}
-            DB_NAME=${{ secrets.DB_NAME }}
+            DB_PORT=3306
+            DB_NAME=${{ secrets.POST_DB_NAME }}
             POST_DB_NAME=${{ secrets.POST_DB_NAME }}
             PET_DB_NAME=${{ secrets.PET_DB_NAME }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -243,7 +243,7 @@ jobs:
       - name: Deploy update-post to EC2 PROD
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.EC2_post_PROD }}
+          host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
           script: |
@@ -251,8 +251,8 @@ jobs:
             DB_HOST=${{ secrets.DB_HOST }}
             DB_USER=${{ secrets.DB_USER }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_PORT=${{ secrets.DB_PORT }}
-            DB_NAME=${{ secrets.DB_NAME }}
+            DB_PORT=3306
+            DB_NAME=${{ secrets.POST_DB_NAME }}
             POST_DB_NAME=${{ secrets.POST_DB_NAME }}
             PET_DB_NAME=${{ secrets.PET_DB_NAME }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -282,8 +282,8 @@ jobs:
           DB_HOST=${{ secrets.DB_HOST }}
           DB_USER=${{ secrets.DB_USER }}
           DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-          DB_PORT=${{ secrets.DB_PORT }}
-          DB_NAME=${{ secrets.DB_NAME }}
+          DB_PORT=3306
+          DB_NAME=${{ secrets.POST_DB_NAME }}
           POST_DB_NAME=${{ secrets.POST_DB_NAME }}
           PET_DB_NAME=${{ secrets.PET_DB_NAME }}
           JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -318,7 +318,7 @@ jobs:
       - name: Deploy get-post-by-id to EC2 TEST
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.EC2_post_TEST }}
+          host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
@@ -326,8 +326,8 @@ jobs:
             DB_HOST=${{ secrets.DB_HOST }}
             DB_USER=${{ secrets.DB_USER }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_PORT=${{ secrets.DB_PORT }}
-            DB_NAME=${{ secrets.DB_NAME }}
+            DB_PORT=3306
+            DB_NAME=${{ secrets.POST_DB_NAME }}
             POST_DB_NAME=${{ secrets.POST_DB_NAME }}
             PET_DB_NAME=${{ secrets.PET_DB_NAME }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -352,7 +352,7 @@ jobs:
       - name: Deploy get-post-by-id to EC2 PROD
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.EC2_post_PROD }}
+          host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
           script: |
@@ -360,8 +360,8 @@ jobs:
             DB_HOST=${{ secrets.DB_HOST }}
             DB_USER=${{ secrets.DB_USER }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_PORT=${{ secrets.DB_PORT }}
-            DB_NAME=${{ secrets.DB_NAME }}
+            DB_PORT=3306
+            DB_NAME=${{ secrets.POST_DB_NAME }}
             POST_DB_NAME=${{ secrets.POST_DB_NAME }}
             PET_DB_NAME=${{ secrets.PET_DB_NAME }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -391,8 +391,8 @@ jobs:
           DB_HOST=${{ secrets.DB_HOST }}
           DB_USER=${{ secrets.DB_USER }}
           DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-          DB_PORT=${{ secrets.DB_PORT }}
-          DB_NAME=${{ secrets.DB_NAME }}
+          DB_PORT=3306
+          DB_NAME=${{ secrets.POST_DB_NAME }}
           POST_DB_NAME=${{ secrets.POST_DB_NAME }}
           PET_DB_NAME=${{ secrets.PET_DB_NAME }}
           JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -427,7 +427,7 @@ jobs:
       - name: Deploy get-all-post to EC2 TEST
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.EC2_post_TEST }}
+          host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
@@ -435,8 +435,8 @@ jobs:
             DB_HOST=${{ secrets.DB_HOST }}
             DB_USER=${{ secrets.DB_USER }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_PORT=${{ secrets.DB_PORT }}
-            DB_NAME=${{ secrets.DB_NAME }}
+            DB_PORT=3306
+            DB_NAME=${{ secrets.POST_DB_NAME }}
             POST_DB_NAME=${{ secrets.POST_DB_NAME }}
             PET_DB_NAME=${{ secrets.PET_DB_NAME }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -461,7 +461,7 @@ jobs:
       - name: Deploy get-all-post to EC2 PROD
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.EC2_post_PROD }}
+          host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
           script: |
@@ -469,8 +469,8 @@ jobs:
             DB_HOST=${{ secrets.DB_HOST }}
             DB_USER=${{ secrets.DB_USER }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_PORT=${{ secrets.DB_PORT }}
-            DB_NAME=${{ secrets.DB_NAME }}
+            DB_PORT=3306
+            DB_NAME=${{ secrets.POST_DB_NAME }}
             POST_DB_NAME=${{ secrets.POST_DB_NAME }}
             PET_DB_NAME=${{ secrets.PET_DB_NAME }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -500,8 +500,8 @@ jobs:
           DB_HOST=${{ secrets.DB_HOST }}
           DB_USER=${{ secrets.DB_USER }}
           DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-          DB_PORT=${{ secrets.DB_PORT }}
-          DB_NAME=${{ secrets.DB_NAME }}
+          DB_PORT=3306
+          DB_NAME=${{ secrets.POST_DB_NAME }}
           POST_DB_NAME=${{ secrets.POST_DB_NAME }}
           PET_DB_NAME=${{ secrets.PET_DB_NAME }}
           JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -536,7 +536,7 @@ jobs:
       - name: Deploy delete-post to EC2 TEST
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.EC2_post_TEST }}
+          host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
@@ -544,8 +544,8 @@ jobs:
             DB_HOST=${{ secrets.DB_HOST }}
             DB_USER=${{ secrets.DB_USER }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_PORT=${{ secrets.DB_PORT }}
-            DB_NAME=${{ secrets.DB_NAME }}
+            DB_PORT=3306
+            DB_NAME=${{ secrets.POST_DB_NAME }}
             POST_DB_NAME=${{ secrets.POST_DB_NAME }}
             PET_DB_NAME=${{ secrets.PET_DB_NAME }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -570,7 +570,7 @@ jobs:
       - name: Deploy delete-post to EC2 PROD
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.EC2_post_PROD }}
+          host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
           script: |
@@ -578,8 +578,8 @@ jobs:
             DB_HOST=${{ secrets.DB_HOST }}
             DB_USER=${{ secrets.DB_USER }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            DB_PORT=${{ secrets.DB_PORT }}
-            DB_NAME=${{ secrets.DB_NAME }}
+            DB_PORT=3306
+            DB_NAME=${{ secrets.POST_DB_NAME }}
             POST_DB_NAME=${{ secrets.POST_DB_NAME }}
             PET_DB_NAME=${{ secrets.PET_DB_NAME }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
