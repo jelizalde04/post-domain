@@ -84,13 +84,12 @@ jobs:
     if: needs.changes.outputs.create_post == 'true'
     steps:
       - uses: actions/checkout@v4
-      - name: Build create-post image
-        working-directory: ./create-post
-        run: docker build -t ${{ env.DOCKERHUB_USERNAME }}/create-post:latest .
       - name: Login to DockerHub
         run: echo "${{ env.DOCKERHUB_TOKEN }}" | docker login -u "${{ env.DOCKERHUB_USERNAME }}" --password-stdin
-      - name: Push create-post image
-        run: docker push ${{ env.DOCKERHUB_USERNAME }}/create-post:latest
+      - name: Build create-post image with compose
+        run: docker compose build create-post
+      - name: Push create-post image with compose
+        run: docker compose push create-post
 
   deploy_create_post_test:
     needs: build_and_push_create_post
@@ -194,13 +193,12 @@ jobs:
     if: needs.changes.outputs.update_post == 'true'
     steps:
       - uses: actions/checkout@v4
-      - name: Build update-post image
-        working-directory: ./update-post
-        run: docker build -t ${{ env.DOCKERHUB_USERNAME }}/update-post:latest .
       - name: Login to DockerHub
         run: echo "${{ env.DOCKERHUB_TOKEN }}" | docker login -u "${{ env.DOCKERHUB_USERNAME }}" --password-stdin
-      - name: Push update-post image
-        run: docker push ${{ env.DOCKERHUB_USERNAME }}/update-post:latest
+      - name: Build update-post image with compose
+        run: docker compose build update-post
+      - name: Push update-post image with compose
+        run: docker compose push update-post
 
   deploy_update_post_test:
     needs: build_and_push_update_post
@@ -304,13 +302,12 @@ jobs:
     if: needs.changes.outputs.get_post_by_id == 'true'
     steps:
       - uses: actions/checkout@v4
-      - name: Build get-post-by-id image
-        working-directory: ./get-post-by-id
-        run: docker build -t ${{ env.DOCKERHUB_USERNAME }}/get-post-by-id:latest .
       - name: Login to DockerHub
         run: echo "${{ env.DOCKERHUB_TOKEN }}" | docker login -u "${{ env.DOCKERHUB_USERNAME }}" --password-stdin
-      - name: Push get-post-by-id image
-        run: docker push ${{ env.DOCKERHUB_USERNAME }}/get-post-by-id:latest
+      - name: Build get-post-by-id image with compose
+        run: docker compose build get-post-by-id
+      - name: Push get-post-by-id image with compose
+        run: docker compose push get-post-by-id
 
   deploy_get_post_by_id_test:
     needs: build_and_push_get_post_by_id
@@ -414,13 +411,12 @@ jobs:
     if: needs.changes.outputs.get_all_post == 'true'
     steps:
       - uses: actions/checkout@v4
-      - name: Build get-all-post image
-        working-directory: ./get-all-post
-        run: docker build -t ${{ env.DOCKERHUB_USERNAME }}/get-all-post:latest .
       - name: Login to DockerHub
         run: echo "${{ env.DOCKERHUB_TOKEN }}" | docker login -u "${{ env.DOCKERHUB_USERNAME }}" --password-stdin
-      - name: Push get-all-post image
-        run: docker push ${{ env.DOCKERHUB_USERNAME }}/get-all-post:latest
+      - name: Build get-all-post image with compose
+        run: docker compose build get-all-post
+      - name: Push get-all-post image with compose
+        run: docker compose push get-all-post
 
   deploy_get_all_post_test:
     needs: build_and_push_get_all_post
@@ -524,13 +520,12 @@ jobs:
     if: needs.changes.outputs.delete_post == 'true'
     steps:
       - uses: actions/checkout@v4
-      - name: Build delete-post image
-        working-directory: ./delete-post
-        run: docker build -t ${{ env.DOCKERHUB_USERNAME }}/delete-post:latest .
       - name: Login to DockerHub
         run: echo "${{ env.DOCKERHUB_TOKEN }}" | docker login -u "${{ env.DOCKERHUB_USERNAME }}" --password-stdin
-      - name: Push delete-post image
-        run: docker push ${{ env.DOCKERHUB_USERNAME }}/delete-post:latest
+      - name: Build delete-post image with compose
+        run: docker compose build delete-post
+      - name: Push delete-post image with compose
+        run: docker compose push delete-post
 
   deploy_delete_post_test:
     needs: build_and_push_delete_post
@@ -599,4 +594,3 @@ jobs:
               --env-file /home/ubuntu/delete-post.env \
               -p 4005:4005 \
               ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest
-
