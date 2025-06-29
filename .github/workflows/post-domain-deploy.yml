@@ -121,13 +121,14 @@ jobs:
             DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
             EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/create-post:latest
+            DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker pull $DOCKERHUB_USERNAME/create-post:latest
             docker stop create-post || true && docker rm create-post || true
             docker run -d --name create-post \
               --env-file /home/ubuntu/create-post.env \
               -p 4001:4001 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/create-post:latest
+              $DOCKERHUB_USERNAME/create-post:latest
 
   deploy_create_post_prod:
     needs: build_and_push_create_post
@@ -156,13 +157,14 @@ jobs:
             DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
             EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/create-post:latest
+            DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker pull $DOCKERHUB_USERNAME/create-post:latest
             docker stop create-post || true && docker rm create-post || true
             docker run -d --name create-post \
               --env-file /home/ubuntu/create-post.env \
               -p 4001:4001 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/create-post:latest
+              $DOCKERHUB_USERNAME/create-post:latest
 
   #---------------------- UPDATE-POST ----------------------
   test_update_post:
@@ -233,13 +235,14 @@ jobs:
             DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
             EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/update-post:latest
+            DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker pull $DOCKERHUB_USERNAME/update-post:latest
             docker stop update-post || true && docker rm update-post || true
             docker run -d --name update-post \
               --env-file /home/ubuntu/update-post.env \
               -p 4002:4002 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/update-post:latest
+              $DOCKERHUB_USERNAME/update-post:latest
 
   deploy_update_post_prod:
     needs: build_and_push_update_post
@@ -268,13 +271,14 @@ jobs:
             DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
             EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/update-post:latest
+            DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker pull $DOCKERHUB_USERNAME/update-post:latest
             docker stop update-post || true && docker rm update-post || true
             docker run -d --name update-post \
               --env-file /home/ubuntu/update-post.env \
               -p 4002:4002 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/update-post:latest
+              $DOCKERHUB_USERNAME/update-post:latest
 
   #---------------------- GET-POST-BY-ID ----------------------
   test_get_post_by_id:
@@ -345,13 +349,14 @@ jobs:
             DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
             EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/get-post-by-id:latest
+            DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker pull $DOCKERHUB_USERNAME/get-post-by-id:latest
             docker stop get-post-by-id || true && docker rm get-post-by-id || true
             docker run -d --name get-post-by-id \
               --env-file /home/ubuntu/get-post-by-id.env \
               -p 4003:4003 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/get-post-by-id:latest
+              $DOCKERHUB_USERNAME/get-post-by-id:latest
 
   deploy_get_post_by_id_prod:
     needs: build_and_push_get_post_by_id
@@ -380,13 +385,14 @@ jobs:
             DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
             EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/get-post-by-id:latest
+            DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker pull $DOCKERHUB_USERNAME/get-post-by-id:latest
             docker stop get-post-by-id || true && docker rm get-post-by-id || true
             docker run -d --name get-post-by-id \
               --env-file /home/ubuntu/get-post-by-id.env \
               -p 4003:4003 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/get-post-by-id:latest
+              $DOCKERHUB_USERNAME/get-post-by-id:latest
 
   #---------------------- GET-ALL-POST ----------------------
   test_get_all_post:
@@ -457,13 +463,14 @@ jobs:
             DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
             EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/get-all-post:latest
+            DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker pull $DOCKERHUB_USERNAME/get-all-post:latest
             docker stop get-all-post || true && docker rm get-all-post || true
             docker run -d --name get-all-post \
               --env-file /home/ubuntu/get-all-post.env \
               -p 4004:4004 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/get-all-post:latest
+              $DOCKERHUB_USERNAME/get-all-post:latest
 
   deploy_get_all_post_prod:
     needs: build_and_push_get_all_post
@@ -492,13 +499,14 @@ jobs:
             DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
             EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/get-all-post:latest
+            DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker pull $DOCKERHUB_USERNAME/get-all-post:latest
             docker stop get-all-post || true && docker rm get-all-post || true
             docker run -d --name get-all-post \
               --env-file /home/ubuntu/get-all-post.env \
               -p 4004:4004 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/get-all-post:latest
+              $DOCKERHUB_USERNAME/get-all-post:latest
 
   #---------------------- DELETE-POST ----------------------
   test_delete_post:
@@ -520,8 +528,6 @@ jobs:
           PET_DB_NAME=${{ secrets.PET_DB_NAME }}
           JWT_SECRET=${{ secrets.JWT_SECRET }}
           S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
-          DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
           DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
           EOF
@@ -571,13 +577,14 @@ jobs:
             DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
             EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest
+            DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker pull $DOCKERHUB_USERNAME/delete-post:latest
             docker stop delete-post || true && docker rm delete-post || true
             docker run -d --name delete-post \
               --env-file /home/ubuntu/delete-post.env \
               -p 4005:4005 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest
+              $DOCKERHUB_USERNAME/delete-post:latest
 
   deploy_delete_post_prod:
     needs: build_and_push_delete_post
@@ -606,10 +613,11 @@ jobs:
             DOCKERHUB_TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
             EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest
+            DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker pull $DOCKERHUB_USERNAME/delete-post:latest
             docker stop delete-post || true && docker rm delete-post || true
             docker run -d --name delete-post \
               --env-file /home/ubuntu/delete-post.env \
               -p 4005:4005 \
-              ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest
+              $DOCKERHUB_USERNAME/delete-post:latest
