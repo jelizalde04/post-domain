@@ -1,0 +1,100 @@
+services:
+  create-post:
+    build:
+      context: ./create-post
+    container_name: create-post
+    ports:
+      - "4001:4001"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - POST_DB_NAME=${POST_DB_NAME}
+      - PET_DB_NAME=${PET_DB_NAME}
+      - JWT_SECRET=${JWT_SECRET}
+      - S3_BUCKET_NAME=${S3_BUCKET_NAME}
+      - AWS_REGION=${AWS_REGION}
+    working_dir: /app
+    command: ["node", "app.js"]
+
+  update-post:
+    build:
+      context: ./update-post
+    container_name: update-post
+    ports:
+      - "4002:4002"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - POST_DB_NAME=${POST_DB_NAME}
+      - PET_DB_NAME=${PET_DB_NAME}
+      - JWT_SECRET=${JWT_SECRET}
+      - S3_BUCKET_NAME=${S3_BUCKET_NAME}
+      - AWS_REGION=${AWS_REGION}
+    working_dir: /app
+    command: ["node", "app.js"]
+
+  get-post-by-id:
+    build:
+      context: ./get-post-by-id
+    container_name: get-post-by-id
+    ports:
+      - "4003:4003"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - POST_DB_NAME=${POST_DB_NAME}
+      - PET_DB_NAME=${PET_DB_NAME}
+      - JWT_SECRET=${JWT_SECRET}
+      - S3_BUCKET_NAME=${S3_BUCKET_NAME}
+      - AWS_REGION=${AWS_REGION}
+    working_dir: /app
+    command: ["node", "app.js"]
+
+  get-all-post:
+    build:
+      context: ./get-all-post
+    container_name: get-all-post
+    ports:
+      - "4004:4004"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - POST_DB_NAME=${POST_DB_NAME}
+      - PET_DB_NAME=${PET_DB_NAME}
+      - JWT_SECRET=${JWT_SECRET}
+      - S3_BUCKET_NAME=${S3_BUCKET_NAME}
+      - AWS_REGION=${AWS_REGION}
+    working_dir: /app
+    command: ["node", "app.js"]
+
+  delete-post:
+    build:
+      context: ./delete-post
+    container_name: delete-post
+    ports:
+      - "4005:4005"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - POST_DB_NAME=${POST_DB_NAME}
+      - PET_DB_NAME=${PET_DB_NAME}
+      - JWT_SECRET=${JWT_SECRET}
+      - S3_BUCKET_NAME=${S3_BUCKET_NAME}
+      - AWS_REGION=${AWS_REGION}
+    working_dir: /app
+    command: ["node", "app.js"]
