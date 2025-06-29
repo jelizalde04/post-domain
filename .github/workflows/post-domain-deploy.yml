@@ -104,8 +104,9 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
           script: |
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop create-post || true
             docker rm create-post || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/create-post:latest
@@ -134,8 +135,9 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
+          port: 22
           script: |
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop create-post || true
             docker rm create-post || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/create-post:latest
@@ -204,8 +206,9 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
           script: |
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop update-post || true
             docker rm update-post || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/update-post:latest
@@ -234,8 +237,9 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
+          port: 22
           script: |
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop update-post || true
             docker rm update-post || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/update-post:latest
@@ -304,8 +308,9 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
           script: |
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop get-post-by-id || true
             docker rm get-post-by-id || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/get-post-by-id:latest
@@ -334,8 +339,9 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
+          port: 22
           script: |
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop get-post-by-id || true
             docker rm get-post-by-id || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/get-post-by-id:latest
@@ -404,8 +410,9 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
           script: |
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop get-all-post || true
             docker rm get-all-post || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/get-all-post:latest
@@ -434,8 +441,9 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
+          port: 22
           script: |
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop get-all-post || true
             docker rm get-all-post || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/get-all-post:latest
@@ -504,8 +512,9 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
           script: |
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop delete-post || true
             docker rm delete-post || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest
@@ -534,8 +543,9 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
+          port: 22
           script: |
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
             docker stop delete-post || true
             docker rm delete-post || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest
@@ -551,4 +561,3 @@ jobs:
               -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
               -e S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }} \
               ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest
-
