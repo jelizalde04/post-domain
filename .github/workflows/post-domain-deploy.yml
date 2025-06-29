@@ -104,36 +104,25 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: 22
           script: |
-            export AWS_REGION="${{ secrets.AWS_REGION }}"
-            export DB_HOST="${{ secrets.DB_HOST }}"
-            export DB_USER="${{ secrets.DB_USER }}"
-            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
-            export DB_PORT="${{ secrets.DB_PORT }}"
-            export POST_DB_NAME="${{ secrets.POST_DB_NAME }}"
-            export PET_DB_NAME="${{ secrets.PET_DB_NAME }}"
-            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
-            export S3_BUCKET_NAME="${{ secrets.S3_BUCKET_NAME }}"
+            cat <<EOF > /home/ubuntu/create-post.env
+            AWS_REGION=${{ secrets.AWS_REGION }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_PORT=${{ secrets.DB_PORT }}
+            POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
-            docker stop create-post || true
-            docker rm create-post || true
-
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/create-post:latest
-
+            docker stop create-post || true && docker rm create-post || true
             docker run -d --name create-post \
+              --env-file /home/ubuntu/create-post.env \
               -p 4001:4001 \
-              -e AWS_REGION=$AWS_REGION \
-              -e DB_HOST=$DB_HOST \
-              -e DB_USER=$DB_USER \
-              -e DB_PASSWORD=$DB_PASSWORD \
-              -e DB_PORT=$DB_PORT \
-              -e POST_DB_NAME=$POST_DB_NAME \
-              -e PET_DB_NAME=$PET_DB_NAME \
-              -e JWT_SECRET=$JWT_SECRET \
-              -e S3_BUCKET_NAME=$S3_BUCKET_NAME \
               ${{ secrets.DOCKERHUB_USERNAME }}/create-post:latest
 
   deploy_create_post_prod:
@@ -148,36 +137,25 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
-          port: 22
           script: |
-            export AWS_REGION="${{ secrets.AWS_REGION }}"
-            export DB_HOST="${{ secrets.DB_HOST }}"
-            export DB_USER="${{ secrets.DB_USER }}"
-            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
-            export DB_PORT="${{ secrets.DB_PORT }}"
-            export POST_DB_NAME="${{ secrets.POST_DB_NAME }}"
-            export PET_DB_NAME="${{ secrets.PET_DB_NAME }}"
-            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
-            export S3_BUCKET_NAME="${{ secrets.S3_BUCKET_NAME }}"
+            cat <<EOF > /home/ubuntu/create-post.env
+            AWS_REGION=${{ secrets.AWS_REGION }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_PORT=${{ secrets.DB_PORT }}
+            POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
-            docker stop create-post || true
-            docker rm create-post || true
-
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/create-post:latest
-
+            docker stop create-post || true && docker rm create-post || true
             docker run -d --name create-post \
+              --env-file /home/ubuntu/create-post.env \
               -p 4001:4001 \
-              -e AWS_REGION=$AWS_REGION \
-              -e DB_HOST=$DB_HOST \
-              -e DB_USER=$DB_USER \
-              -e DB_PASSWORD=$DB_PASSWORD \
-              -e DB_PORT=$DB_PORT \
-              -e POST_DB_NAME=$POST_DB_NAME \
-              -e PET_DB_NAME=$PET_DB_NAME \
-              -e JWT_SECRET=$JWT_SECRET \
-              -e S3_BUCKET_NAME=$S3_BUCKET_NAME \
               ${{ secrets.DOCKERHUB_USERNAME }}/create-post:latest
 
   #---------------------- UPDATE-POST ----------------------
@@ -232,36 +210,25 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: 22
           script: |
-            export AWS_REGION="${{ secrets.AWS_REGION }}"
-            export DB_HOST="${{ secrets.DB_HOST }}"
-            export DB_USER="${{ secrets.DB_USER }}"
-            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
-            export DB_PORT="${{ secrets.DB_PORT }}"
-            export POST_DB_NAME="${{ secrets.POST_DB_NAME }}"
-            export PET_DB_NAME="${{ secrets.PET_DB_NAME }}"
-            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
-            export S3_BUCKET_NAME="${{ secrets.S3_BUCKET_NAME }}"
+            cat <<EOF > /home/ubuntu/update-post.env
+            AWS_REGION=${{ secrets.AWS_REGION }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_PORT=${{ secrets.DB_PORT }}
+            POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
-            docker stop update-post || true
-            docker rm update-post || true
-
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/update-post:latest
-
+            docker stop update-post || true && docker rm update-post || true
             docker run -d --name update-post \
+              --env-file /home/ubuntu/update-post.env \
               -p 4002:4002 \
-              -e AWS_REGION=$AWS_REGION \
-              -e DB_HOST=$DB_HOST \
-              -e DB_USER=$DB_USER \
-              -e DB_PASSWORD=$DB_PASSWORD \
-              -e DB_PORT=$DB_PORT \
-              -e POST_DB_NAME=$POST_DB_NAME \
-              -e PET_DB_NAME=$PET_DB_NAME \
-              -e JWT_SECRET=$JWT_SECRET \
-              -e S3_BUCKET_NAME=$S3_BUCKET_NAME \
               ${{ secrets.DOCKERHUB_USERNAME }}/update-post:latest
 
   deploy_update_post_prod:
@@ -276,36 +243,25 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
-          port: 22
           script: |
-            export AWS_REGION="${{ secrets.AWS_REGION }}"
-            export DB_HOST="${{ secrets.DB_HOST }}"
-            export DB_USER="${{ secrets.DB_USER }}"
-            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
-            export DB_PORT="${{ secrets.DB_PORT }}"
-            export POST_DB_NAME="${{ secrets.POST_DB_NAME }}"
-            export PET_DB_NAME="${{ secrets.PET_DB_NAME }}"
-            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
-            export S3_BUCKET_NAME="${{ secrets.S3_BUCKET_NAME }}"
+            cat <<EOF > /home/ubuntu/update-post.env
+            AWS_REGION=${{ secrets.AWS_REGION }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_PORT=${{ secrets.DB_PORT }}
+            POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
-            docker stop update-post || true
-            docker rm update-post || true
-
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/update-post:latest
-
+            docker stop update-post || true && docker rm update-post || true
             docker run -d --name update-post \
+              --env-file /home/ubuntu/update-post.env \
               -p 4002:4002 \
-              -e AWS_REGION=$AWS_REGION \
-              -e DB_HOST=$DB_HOST \
-              -e DB_USER=$DB_USER \
-              -e DB_PASSWORD=$DB_PASSWORD \
-              -e DB_PORT=$DB_PORT \
-              -e POST_DB_NAME=$POST_DB_NAME \
-              -e PET_DB_NAME=$PET_DB_NAME \
-              -e JWT_SECRET=$JWT_SECRET \
-              -e S3_BUCKET_NAME=$S3_BUCKET_NAME \
               ${{ secrets.DOCKERHUB_USERNAME }}/update-post:latest
 
   #---------------------- GET-POST-BY-ID ----------------------
@@ -360,36 +316,25 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: 22
           script: |
-            export AWS_REGION="${{ secrets.AWS_REGION }}"
-            export DB_HOST="${{ secrets.DB_HOST }}"
-            export DB_USER="${{ secrets.DB_USER }}"
-            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
-            export DB_PORT="${{ secrets.DB_PORT }}"
-            export POST_DB_NAME="${{ secrets.POST_DB_NAME }}"
-            export PET_DB_NAME="${{ secrets.PET_DB_NAME }}"
-            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
-            export S3_BUCKET_NAME="${{ secrets.S3_BUCKET_NAME }}"
+            cat <<EOF > /home/ubuntu/get-post-by-id.env
+            AWS_REGION=${{ secrets.AWS_REGION }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_PORT=${{ secrets.DB_PORT }}
+            POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
-            docker stop get-post-by-id || true
-            docker rm get-post-by-id || true
-
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/get-post-by-id:latest
-
+            docker stop get-post-by-id || true && docker rm get-post-by-id || true
             docker run -d --name get-post-by-id \
+              --env-file /home/ubuntu/get-post-by-id.env \
               -p 4003:4003 \
-              -e AWS_REGION=$AWS_REGION \
-              -e DB_HOST=$DB_HOST \
-              -e DB_USER=$DB_USER \
-              -e DB_PASSWORD=$DB_PASSWORD \
-              -e DB_PORT=$DB_PORT \
-              -e POST_DB_NAME=$POST_DB_NAME \
-              -e PET_DB_NAME=$PET_DB_NAME \
-              -e JWT_SECRET=$JWT_SECRET \
-              -e S3_BUCKET_NAME=$S3_BUCKET_NAME \
               ${{ secrets.DOCKERHUB_USERNAME }}/get-post-by-id:latest
 
   deploy_get_post_by_id_prod:
@@ -404,36 +349,25 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
-          port: 22
           script: |
-            export AWS_REGION="${{ secrets.AWS_REGION }}"
-            export DB_HOST="${{ secrets.DB_HOST }}"
-            export DB_USER="${{ secrets.DB_USER }}"
-            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
-            export DB_PORT="${{ secrets.DB_PORT }}"
-            export POST_DB_NAME="${{ secrets.POST_DB_NAME }}"
-            export PET_DB_NAME="${{ secrets.PET_DB_NAME }}"
-            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
-            export S3_BUCKET_NAME="${{ secrets.S3_BUCKET_NAME }}"
+            cat <<EOF > /home/ubuntu/get-post-by-id.env
+            AWS_REGION=${{ secrets.AWS_REGION }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_PORT=${{ secrets.DB_PORT }}
+            POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
-            docker stop get-post-by-id || true
-            docker rm get-post-by-id || true
-
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/get-post-by-id:latest
-
+            docker stop get-post-by-id || true && docker rm get-post-by-id || true
             docker run -d --name get-post-by-id \
+              --env-file /home/ubuntu/get-post-by-id.env \
               -p 4003:4003 \
-              -e AWS_REGION=$AWS_REGION \
-              -e DB_HOST=$DB_HOST \
-              -e DB_USER=$DB_USER \
-              -e DB_PASSWORD=$DB_PASSWORD \
-              -e DB_PORT=$DB_PORT \
-              -e POST_DB_NAME=$POST_DB_NAME \
-              -e PET_DB_NAME=$PET_DB_NAME \
-              -e JWT_SECRET=$JWT_SECRET \
-              -e S3_BUCKET_NAME=$S3_BUCKET_NAME \
               ${{ secrets.DOCKERHUB_USERNAME }}/get-post-by-id:latest
 
   #---------------------- GET-ALL-POST ----------------------
@@ -488,36 +422,25 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: 22
           script: |
-            export AWS_REGION="${{ secrets.AWS_REGION }}"
-            export DB_HOST="${{ secrets.DB_HOST }}"
-            export DB_USER="${{ secrets.DB_USER }}"
-            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
-            export DB_PORT="${{ secrets.DB_PORT }}"
-            export POST_DB_NAME="${{ secrets.POST_DB_NAME }}"
-            export PET_DB_NAME="${{ secrets.PET_DB_NAME }}"
-            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
-            export S3_BUCKET_NAME="${{ secrets.S3_BUCKET_NAME }}"
+            cat <<EOF > /home/ubuntu/get-all-post.env
+            AWS_REGION=${{ secrets.AWS_REGION }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_PORT=${{ secrets.DB_PORT }}
+            POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
-            docker stop get-all-post || true
-            docker rm get-all-post || true
-
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/get-all-post:latest
-
+            docker stop get-all-post || true && docker rm get-all-post || true
             docker run -d --name get-all-post \
+              --env-file /home/ubuntu/get-all-post.env \
               -p 4004:4004 \
-              -e AWS_REGION=$AWS_REGION \
-              -e DB_HOST=$DB_HOST \
-              -e DB_USER=$DB_USER \
-              -e DB_PASSWORD=$DB_PASSWORD \
-              -e DB_PORT=$DB_PORT \
-              -e POST_DB_NAME=$POST_DB_NAME \
-              -e PET_DB_NAME=$PET_DB_NAME \
-              -e JWT_SECRET=$JWT_SECRET \
-              -e S3_BUCKET_NAME=$S3_BUCKET_NAME \
               ${{ secrets.DOCKERHUB_USERNAME }}/get-all-post:latest
 
   deploy_get_all_post_prod:
@@ -532,36 +455,25 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
-          port: 22
           script: |
-            export AWS_REGION="${{ secrets.AWS_REGION }}"
-            export DB_HOST="${{ secrets.DB_HOST }}"
-            export DB_USER="${{ secrets.DB_USER }}"
-            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
-            export DB_PORT="${{ secrets.DB_PORT }}"
-            export POST_DB_NAME="${{ secrets.POST_DB_NAME }}"
-            export PET_DB_NAME="${{ secrets.PET_DB_NAME }}"
-            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
-            export S3_BUCKET_NAME="${{ secrets.S3_BUCKET_NAME }}"
+            cat <<EOF > /home/ubuntu/get-all-post.env
+            AWS_REGION=${{ secrets.AWS_REGION }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_PORT=${{ secrets.DB_PORT }}
+            POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
-            docker stop get-all-post || true
-            docker rm get-all-post || true
-
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/get-all-post:latest
-
+            docker stop get-all-post || true && docker rm get-all-post || true
             docker run -d --name get-all-post \
+              --env-file /home/ubuntu/get-all-post.env \
               -p 4004:4004 \
-              -e AWS_REGION=$AWS_REGION \
-              -e DB_HOST=$DB_HOST \
-              -e DB_USER=$DB_USER \
-              -e DB_PASSWORD=$DB_PASSWORD \
-              -e DB_PORT=$DB_PORT \
-              -e POST_DB_NAME=$POST_DB_NAME \
-              -e PET_DB_NAME=$PET_DB_NAME \
-              -e JWT_SECRET=$JWT_SECRET \
-              -e S3_BUCKET_NAME=$S3_BUCKET_NAME \
               ${{ secrets.DOCKERHUB_USERNAME }}/get-all-post:latest
 
   #---------------------- DELETE-POST ----------------------
@@ -616,36 +528,25 @@ jobs:
           host: ${{ secrets.EC2_POST_TEST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          port: 22
           script: |
-            export AWS_REGION="${{ secrets.AWS_REGION }}"
-            export DB_HOST="${{ secrets.DB_HOST }}"
-            export DB_USER="${{ secrets.DB_USER }}"
-            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
-            export DB_PORT="${{ secrets.DB_PORT }}"
-            export POST_DB_NAME="${{ secrets.POST_DB_NAME }}"
-            export PET_DB_NAME="${{ secrets.PET_DB_NAME }}"
-            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
-            export S3_BUCKET_NAME="${{ secrets.S3_BUCKET_NAME }}"
+            cat <<EOF > /home/ubuntu/delete-post.env
+            AWS_REGION=${{ secrets.AWS_REGION }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_PORT=${{ secrets.DB_PORT }}
+            POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
-            docker stop delete-post || true
-            docker rm delete-post || true
-
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest
-
+            docker stop delete-post || true && docker rm delete-post || true
             docker run -d --name delete-post \
+              --env-file /home/ubuntu/delete-post.env \
               -p 4005:4005 \
-              -e AWS_REGION=$AWS_REGION \
-              -e DB_HOST=$DB_HOST \
-              -e DB_USER=$DB_USER \
-              -e DB_PASSWORD=$DB_PASSWORD \
-              -e DB_PORT=$DB_PORT \
-              -e POST_DB_NAME=$POST_DB_NAME \
-              -e PET_DB_NAME=$PET_DB_NAME \
-              -e JWT_SECRET=$JWT_SECRET \
-              -e S3_BUCKET_NAME=$S3_BUCKET_NAME \
               ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest
 
   deploy_delete_post_prod:
@@ -660,34 +561,24 @@ jobs:
           host: ${{ secrets.EC2_POST_PROD }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY_PROD }}
-          port: 22
           script: |
-            export AWS_REGION="${{ secrets.AWS_REGION }}"
-            export DB_HOST="${{ secrets.DB_HOST }}"
-            export DB_USER="${{ secrets.DB_USER }}"
-            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
-            export DB_PORT="${{ secrets.DB_PORT }}"
-            export POST_DB_NAME="${{ secrets.POST_DB_NAME }}"
-            export PET_DB_NAME="${{ secrets.PET_DB_NAME }}"
-            export JWT_SECRET="${{ secrets.JWT_SECRET }}"
-            export S3_BUCKET_NAME="${{ secrets.S3_BUCKET_NAME }}"
+            cat <<EOF > /home/ubuntu/delete-post.env
+            AWS_REGION=${{ secrets.AWS_REGION }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_PORT=${{ secrets.DB_PORT }}
+            POST_DB_NAME=${{ secrets.POST_DB_NAME }}
+            PET_DB_NAME=${{ secrets.PET_DB_NAME }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}
+            EOF
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
-            docker stop delete-post || true
-            docker rm delete-post || true
-
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest
-
+            docker stop delete-post || true && docker rm delete-post || true
             docker run -d --name delete-post \
+              --env-file /home/ubuntu/delete-post.env \
               -p 4005:4005 \
-              -e AWS_REGION=$AWS_REGION \
-              -e DB_HOST=$DB_HOST \
-              -e DB_USER=$DB_USER \
-              -e DB_PASSWORD=$DB_PASSWORD \
-              -e DB_PORT=$DB_PORT \
-              -e POST_DB_NAME=$POST_DB_NAME \
-              -e PET_DB_NAME=$PET_DB_NAME \
-              -e JWT_SECRET=$JWT_SECRET \
-              -e S3_BUCKET_NAME=$S3_BUCKET_NAME \
               ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest
+
