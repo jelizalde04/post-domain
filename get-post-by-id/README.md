@@ -26,6 +26,7 @@ The **Get-Post-By-ID** microservice follows a typical Node.js/Express architectu
 - **Swagger**: For documenting and testing API endpoints.
 - **CORS**: To allow cross-origin requests from external clients.
 
+
 ---
 
 ## Folder Structure

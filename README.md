@@ -109,6 +109,6 @@ The **Post-Domain** architecture is based on **microservices**. Each microservic
    Después de iniciar los servicios, puedes acceder a la documentación Swagger UI en los siguientes endpoints:
    - Create-Post: `GET /api-docs-createPost/`
    - Delete-Post: `GET /api-docs-deletePost`
-   - Get-All-Post: `GET /api-docs-getAllPosts`
+   - Get-All-Post: `GET /api-docs-getAllPost`
    - Get-Post-By-ID: `GET /api-docs-getPostById`
    - Update-Post: `GET /api-docs-updatePost`

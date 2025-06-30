@@ -124,7 +124,7 @@ curl -X GET http://localhost:4003/posts \
 
 5. **Access Swagger Documentation:**  
    Once the server is running, you can access the Swagger documentation for the API at:  
-   [http://localhost:4003/api-docs-getAllPosts](http://localhost:4003/api-docs-getAllPosts)
+   [http://localhost:4003/api-docs-getAllPosts](http://localhost:4003/api-docs-getAllPost)
 
 ---
 
