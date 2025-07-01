@@ -123,6 +123,7 @@ jobs:
 
             DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/create-post:latest || true
             docker pull $DOCKERHUB_USERNAME/create-post:latest
             docker stop create-post || true && docker rm create-post || true
             docker run -d --name create-post \
@@ -159,6 +160,7 @@ jobs:
 
             DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/create-post:latest || true
             docker pull $DOCKERHUB_USERNAME/create-post:latest
             docker stop create-post || true && docker rm create-post || true
             docker run -d --name create-post \
@@ -237,6 +239,7 @@ jobs:
 
             DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/update-post:latest || true
             docker pull $DOCKERHUB_USERNAME/update-post:latest
             docker stop update-post || true && docker rm update-post || true
             docker run -d --name update-post \
@@ -273,6 +276,7 @@ jobs:
 
             DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/update-post:latest || true
             docker pull $DOCKERHUB_USERNAME/update-post:latest
             docker stop update-post || true && docker rm update-post || true
             docker run -d --name update-post \
@@ -351,6 +355,7 @@ jobs:
 
             DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/get-post-by-id:latest || true
             docker pull $DOCKERHUB_USERNAME/get-post-by-id:latest
             docker stop get-post-by-id || true && docker rm get-post-by-id || true
             docker run -d --name get-post-by-id \
@@ -387,6 +392,7 @@ jobs:
 
             DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/get-post-by-id:latest || true
             docker pull $DOCKERHUB_USERNAME/get-post-by-id:latest
             docker stop get-post-by-id || true && docker rm get-post-by-id || true
             docker run -d --name get-post-by-id \
@@ -465,6 +471,7 @@ jobs:
 
             DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/get-all-post:latest || true
             docker pull $DOCKERHUB_USERNAME/get-all-post:latest
             docker stop get-all-post || true && docker rm get-all-post || true
             docker run -d --name get-all-post \
@@ -501,6 +508,7 @@ jobs:
 
             DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/get-all-post:latest || true
             docker pull $DOCKERHUB_USERNAME/get-all-post:latest
             docker stop get-all-post || true && docker rm get-all-post || true
             docker run -d --name get-all-post \
@@ -579,6 +587,7 @@ jobs:
 
             DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest || true
             docker pull $DOCKERHUB_USERNAME/delete-post:latest
             docker stop delete-post || true && docker rm delete-post || true
             docker run -d --name delete-post \
@@ -615,6 +624,7 @@ jobs:
 
             DOCKERHUB_USERNAME="${{ secrets.DOCKERHUB_USERNAME }}"
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker rmi -f ${{ secrets.DOCKERHUB_USERNAME }}/delete-post:latest || true
             docker pull $DOCKERHUB_USERNAME/delete-post:latest
             docker stop delete-post || true && docker rm delete-post || true
             docker run -d --name delete-post \
