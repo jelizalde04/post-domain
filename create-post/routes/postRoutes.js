@@ -9,7 +9,7 @@ const upload = multer({ storage: storage }).single('image');
 
 /**
  * @swagger
- * /posts/{petId}:
+ * /posts/create/{petId}:
  *   post:
  *     summary: Crea una publicación para una mascota
  *     description: Crea una nueva publicación asociada a una mascota. El responsable debe ser el mismo que creó la mascota.

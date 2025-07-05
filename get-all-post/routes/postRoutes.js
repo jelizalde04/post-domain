@@ -5,7 +5,7 @@ const authenticateToken = require("../middlewares/auth");
 
 /**
  * @swagger
- * /pets/{petId}/posts:
+ * /posts/pet/{petId}:
  *   get:
  *     summary: Obtener todas las publicaciones asociadas a una mascota
  *     description: Permite a un responsable obtener todas las publicaciones asociadas a su mascota, verificando que el usuario es el responsable de la mascota.
@@ -32,5 +32,5 @@ const authenticateToken = require("../middlewares/auth");
  *       500:
  *         description: Error interno del servidor
  */
-router.get("/:petId/posts", authenticateToken, getAllPostsByPet);  // Usamos GET para obtener todas las publicaciones de una mascota
+router.get("/:petId", authenticateToken, getAllPostsByPet);  // Usamos GET para obtener todas las publicaciones de una mascota
 module.exports = router;

@@ -10,7 +10,10 @@ app.use(express.json());
 
 setupSwagger(app);
 
-app.use("/pets/", postRoutes);
+app.use("/posts/pet", postRoutes);
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', message: 'Service is healthy' });
+});
 
 const PORT = process.env.PORT || 4004;
 
