@@ -1,14 +1,29 @@
 const express = require("express");
 const router = express.Router();
-const { getAllPostsByPet } = require("../controllers/postController");
+const { getAllPostsByPet, getAllPostsNoAuth } = require("../controllers/postController");
 const authenticateToken = require("../middlewares/auth");
+
+/**
+ * @swagger
+ * /posts/all:
+ *   get:
+ *     summary: Obtener todas las publicaciones (público)
+ *     description: Obtiene todas las publicaciones sin requerir autenticación.
+ *     tags: [posts]
+ *     responses:
+ *       200:
+ *         description: Publicaciones obtenidas correctamente
+ *       500:
+ *         description: Error interno del servidor
+ */
+router.get("/all", getAllPostsNoAuth);
 
 /**
  * @swagger
  * /posts/pet/{petId}:
  *   get:
- *     summary: Obtener todas las publicaciones asociadas a una mascota
- *     description: Permite a un responsable obtener todas las publicaciones asociadas a su mascota, verificando que el usuario es el responsable de la mascota.
+ *     summary: Obtener publicaciones por mascota (protegido)
+ *     description: Requiere token. Solo el responsable puede ver las publicaciones de su mascota.
  *     tags: [posts]
  *     parameters:
  *       - in: path
@@ -17,20 +32,19 @@ const authenticateToken = require("../middlewares/auth");
  *         schema:
  *           type: string
  *           format: uuid
- *         description: ID de la mascota cuyas publicaciones se desean obtener
+ *         description: ID de la mascota
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Detalles de las publicaciones obtenidos correctamente
- *       400:
- *         description: Error de validación
- *       401:
- *         description: Token no proporcionado o inválido
+ *         description: Publicaciones obtenidas correctamente
  *       403:
- *         description: No tienes permiso para ver las publicaciones de esta mascota
+ *         description: Token inválido o sin permiso
  *       404:
  *         description: Mascota no encontrada
  *       500:
  *         description: Error interno del servidor
  */
-router.get("/:petId", authenticateToken, getAllPostsByPet);  // Usamos GET para obtener todas las publicaciones de una mascota
+router.get("/pet/:petId", authenticateToken, getAllPostsByPet);
+
 module.exports = router;

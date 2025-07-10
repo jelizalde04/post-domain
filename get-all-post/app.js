@@ -10,7 +10,7 @@ app.use(express.json());
 
 setupSwagger(app);
 
-app.use("/posts/pet", postRoutes);
+app.use("/posts", postRoutes); 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'Service is healthy' });
 });

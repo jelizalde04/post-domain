@@ -5,7 +5,7 @@ const swaggerOptions = {
   swaggerDefinition: {
     openapi: "3.0.0",
     info: {
-      title: "post Profile API",
+      title: "Post Profile API",
       version: "1.0.0",
       description: "API para el manejo de publicaciones",
     },
