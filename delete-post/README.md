@@ -13,7 +13,7 @@ The **Delete-Post Microservice** allows authenticated users to delete posts asso
 - **Image Removal**: The image associated with the deleted post is also removed from Amazon S3.
 - **Data Deletion**: The post is removed from the database.
 - **Swagger Documentation**: Provides interactive API documentation to test and explore the endpoints.
-
+ 
 ---
 
 ## Architecture

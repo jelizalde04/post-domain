@@ -2,7 +2,7 @@
 
 ## Overview
 
-The **Create-Post Microservice** allows authenticated users (pet owners) to create new posts associated with a pet. Each post includes text content and an image that is uploaded to Amazon S3. This microservice ensures that only authorized users can create posts related to their pets.
+The **Create-Post Microservice** allows authenticated users (pet owners) to create new posts associated with a pet. Each post includes text content and an image that is uploaded to Amazon S3. This microservice ensures that only authorized users can create posts related to their pets. 
 
 ---
 

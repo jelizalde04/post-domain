@@ -13,7 +13,7 @@ The **Update-Post Microservice** allows authenticated users to update an existin
 - **Image Upload**: If a new image is provided, it will be uploaded to **Amazon S3**, and the new image URL will replace the old one in the database.
 - **Data Update**: The post's content and image URL are updated in the database.
 - **Swagger Documentation**: Provides interactive API documentation to test and explore the endpoints.
-
+ 
 ---
 
 ## Architecture

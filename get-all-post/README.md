@@ -12,7 +12,7 @@ The **Get-All-Post Microservice** allows authenticated users to retrieve all pos
 - **JWT Authentication**: Ensures that the user is authorized to access the posts.
 - **Data Retrieval**: Fetches all posts from the database and returns them in the response.
 - **Swagger Documentation**: Provides interactive API documentation to test and explore the endpoints.
-
+ 
 ---
 
 ## Architecture

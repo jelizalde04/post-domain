@@ -12,7 +12,7 @@ The **Get-Post-By-ID Microservice** allows authenticated users to retrieve a spe
 - **JWT Authentication**: Ensures that the user is authorized to access the post.
 - **Data Retrieval**: Fetches a specific post from the database and returns it in the response.
 - **Swagger Documentation**: Provides interactive API documentation to test and explore the endpoints.
-
+ 
 ---
 
 ## Architecture
